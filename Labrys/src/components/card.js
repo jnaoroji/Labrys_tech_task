@@ -5,15 +5,14 @@ import { SkeletonCircle } from "@chakra-ui/react";
 import { Navigate } from "react-router-dom";
 import useCryptoStore from "../pages/cryptoStore"; // Import the Zustand store
 import { useEffect, useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 
 // https://coinmarketcap.com/api/documentation/v1/#operation/getV1CryptocurrencyListingsLatest
 
-const API_KEY= "8b98703c-d8ba-47ee-8375-c96f56bd9223";
-
+const API_KEY = "8b98703c-d8ba-47ee-8375-c96f56bd9223";
 
 export default function Crypto({ cardData }) {
-// const navigate = useNavigate();
+  // const navigate = useNavigate();
   const cryptoStore = useCryptoStore((s) => s.myTokens);
   const handleClick = () => {
     // // Save the cardData to myTokens
@@ -23,32 +22,32 @@ export default function Crypto({ cardData }) {
   };
   const [cryptoData, setCryptoData] = useState([]);
   let response = null;
-useEffect(() => {
+  useEffect(() => {
     const fetchCryptocurrencyData = async () => {
-        let response = null;
-        try {
-            response = await axios.get(
-                'v1/cryptocurrency/listings/latest?limit=20',
-                {
-                    headers: {
-                        'X-CMC_PRO_API_KEY': API_KEY,
-                    },
-                }
-            );
-        } catch (ex) {
-            console.log(ex);
-        }
-        if (response) {
-            const json = response.data;
-            console.log(json);
-            setCryptoData(json);
-        }
-    }
+      let response = null;
+      try {
+        response = await axios.get(
+          "v1/cryptocurrency/listings/latest?limit=20",
+          {
+            headers: {
+              "X-CMC_PRO_API_KEY": API_KEY,
+            },
+          }
+        );
+      } catch (ex) {
+        console.log(ex);
+      }
+      if (response) {
+        const json = response.data;
+        console.log(json);
+        setCryptoData(json);
+      }
+    };
 
     fetchCryptocurrencyData();
-}, []);
+  }, []);
 
-  console.log(cryptoStore)
+  console.log(cryptoStore);
   return (
     <Card onClick={handleClick}>
       <CardBody>
