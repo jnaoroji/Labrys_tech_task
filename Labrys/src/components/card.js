@@ -12,7 +12,7 @@ export default function Crypto({ cardData }) {
     // // Save the cardData to myTokens
     // cryptoStore.addToMyTokens(cardData);
     // //then navigate to myTokens
-    // Navigate('../pages/myTokens');
+    Navigate('../pages/myTokens');
   };
 
   console.log(cryptoStore)
